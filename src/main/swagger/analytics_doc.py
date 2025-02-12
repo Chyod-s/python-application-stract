@@ -13,5 +13,5 @@ class UsersResource(Resource):
         return {
         "status_code":200,
         "msg": "Sucesso",
-        "data": response
+        "data": response.content.decode('utf-8')
     }
