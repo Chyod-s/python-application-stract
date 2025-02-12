@@ -5,7 +5,7 @@ from src.main.swagger.config import api
 
 def register_routes(app):
     @app.route('/', methods=['GET'])
-    def get_data():
+    def get_data_instructions():
         response = get_instructions()
 
         if response.status_code == 200:
