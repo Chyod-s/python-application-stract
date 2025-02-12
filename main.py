@@ -1,6 +1,14 @@
-from src.main.routes.routes import app as application
+from src.main.app import create_app
 from os import environ
 
-if __name__ == '__main__':
+def main():
+    from src.main.controllers.routes import register_routes
+    app = create_app()
+
+    register_routes(app)
+
     SERVER_HOST = environ.get('SERVER_HOST', 'localhost')
-    application.run(host=SERVER_HOST,port=5500, debug=True)
+    app.run(host=SERVER_HOST, port=5500, debug=True)
+
+if __name__ == '__main__':
+    main() 
