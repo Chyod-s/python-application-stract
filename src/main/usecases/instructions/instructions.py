@@ -18,4 +18,6 @@ def desealize_content(response):
 
     response = response.split('\n')
 
+    response = [x for x in response if x != '']
+
     return response
