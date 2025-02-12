@@ -9,5 +9,13 @@ def get_instructions():
         "Authorization": f"Bearer {BEARER_TOKEN}",
         "Content-Type": "application/json"
     }
-    return requests.get(url, headers=headers)
-    
+    response = requests.get(url, headers=headers)
+    content = response.content.decode('utf-8')
+
+    return desealize_content(content)
+
+def desealize_content(response):
+
+    response = response.split('\n')
+
+    return response
