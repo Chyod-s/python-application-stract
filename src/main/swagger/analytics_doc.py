@@ -22,10 +22,9 @@ class UsersResource(Resource):
         "data": response
         }
 
-@ns_analytics.route('/get_ad_on_platform')
+@ns_analytics.route('/<string:platform>')
 class GetAdOnPlatform(Resource):
-    @ns_analytics.param('platform', '', type='string', required=True)
-    def get(self):
+    def get(self, platform):
         """
         Recupera os anúncios disponíveis para uma plataforma específica.
 
@@ -35,9 +34,38 @@ class GetAdOnPlatform(Resource):
         Retorna:
         - Resposta contendo os anúncios disponíveis na plataforma solicitada.
         """
-        platform_name = request.args.get('platform')
 
-        response = get_ad_on_platform(platform_name)
+        response = get_ad_on_platform(platform)
         save_list_to_csv(response, "get_ad_on_platform.csv")
 
         return response
+
+@ns_analytics.route('/<string:platform>/Resume')
+class GetAdOnPlatformColapse(Resource):
+    def get(self, platform):
+        """
+    
+        """
+
+
+        return platform
+
+@ns_analytics.route('/geral')
+class UsersResource(Resource):
+    @ns_analytics.doc('get_general_info')
+    def get(self):
+        """
+   
+        """
+
+        return "lol"
+    
+@ns_analytics.route('/geral/resumo')
+class UsersResource(Resource):
+    @ns_analytics.doc('get_general_info_resume')
+    def get(self):
+        """
+   
+        """
+
+        return "hahaha"
