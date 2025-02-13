@@ -1,21 +1,44 @@
-from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform, get_fields_platform
+from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform, get_fields_platform, get_insights_platform
 
 def get_ad_on_platform(platform):
-    """ 
-    Obtém os anúncios disponíveis para uma plataforma específica, 
-    fazendo paginação caso necessário.
+    """
+    Recupera os anúncios disponíveis para uma plataforma específica, utilizando insights de contas associadas à plataforma.
 
     Parâmetros:
-    - platform (str): Nome da plataforma.
+    - platform (str): Nome da plataforma da qual os anúncios serão recuperados.
 
     Retorna:
-    - list: Lista contendo os anúncios disponíveis.
+    - list: Lista contendo os anúncios disponíveis, extraídos dos insights das contas da plataforma.
     """
-    people = get_fields(platform)
+    insights = get_insights(platform)
     
+    return insights
 
-    return people
+def get_insights(platform):
+    """
+    Recupera os insights de uma plataforma específica para todas as contas disponíveis.
+
+    Parâmetros:
+    - platform (str): Nome da plataforma da qual os insights serão obtidos.
+
+    Retorna:
+    - list: Lista contendo os insights de todas as contas associadas à plataforma.
+    """
+    list_insights = list()
+
+    fields = get_fields(platform)
+    list_field = ",".join(field["value"] for field in fields)
     
+    people = get_people_accounts(platform)
+    for i in people:
+        account = i["id"]
+        token = i["token"]
+        insights = get_insights_platform(platform, account, token, list_field)
+        list_insights.append(insights)
+ 
+    return list_insights
+
+
 def get_people_accounts(platform):
     """
     Obtém a lista de contas associadas a uma determinada plataforma, realizando paginação se necessário.
@@ -44,6 +67,7 @@ def get_people_accounts(platform):
 
         return list_people
 
+
 def get_fields(platform):
     """
     Obtém a lista de campos disponíveis para uma determinada plataforma, realizando paginação se necessário.
@@ -60,15 +84,17 @@ def get_fields(platform):
 
     fields = get_fields_platform(platform, page)
 
-    if 'fields' in fields and fields['pagination']['total'] > 0:
-        total_pages = fields['pagination']['total']
-        
-        page += fields['pagination']['total']
+    if len(fields) == 1:
+        return fields['fields']
 
-        for i in range(1, total_pages + 1):
-            fields = get_fields_platform(platform, i)
-            if 'fields' in fields:
-                list_fields.extend(fields['fields'])
+    total_pages = fields['pagination']['total']
+    
+    page += fields['pagination']['total']
 
-        return list_fields
+    for i in range(1, total_pages + 1):
+        fields = get_fields_platform(platform, i)
+        if 'fields' in fields:
+            list_fields.extend(fields['fields'])
+
+    return list_fields
     
