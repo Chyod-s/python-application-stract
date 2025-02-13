@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from src.main.swagger.analytics_doc import ns_analytics
 from src.main.usecases.instructions.instructions_use_case import get_instructions
-from main.usecases.plataform.accounts_use_case import get_plataform
+from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform
 from src.main.swagger.config import api
 
 def register_routes(app):
@@ -14,7 +14,7 @@ def register_routes(app):
     app.route('/instructions', methods=['GET'])(get_data_instructions)
 
     def get_data_plataform():
-        response = get_plataform()
+        response = get_accounts_platform()
         
         return jsonify(response)
 

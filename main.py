@@ -11,4 +11,4 @@ def main():
     app.run(host=SERVER_HOST, port=5500, debug=True)
 
 if __name__ == '__main__':
-    main()
+    main()  

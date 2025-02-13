@@ -1,5 +1,4 @@
 import requests
-from flask import jsonify
 import os
 import json
 
@@ -33,10 +32,8 @@ def get_fields_platform(plataform, page):
 
     return json.loads(content)
 
-def get_insights_platform(platform, account, token):
-    url = f'https://sidebar.stract.to/api/insights?platform={platform}&account={account}&token={token}&fields={[
-        'Platform', 'Ad_name', 'Clicks', 'Impressions', 'Cost', 'Conversions', 'Ctr', 'Cpc', 'Roas'
-    ]}'
+def get_insights_platform(platform, account, token, fields):
+    url = f'https://sidebar.stract.to/api/insights?platform={platform}&account={account}&token={token}&fields={fields}'
     
     headers = {
         "Authorization": f"Bearer {BEARER_TOKEN}",
