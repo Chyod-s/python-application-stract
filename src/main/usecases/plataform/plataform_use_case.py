@@ -1,4 +1,4 @@
-from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform, get_fields_platform, get_insights_platform
+from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform, get_fields_platform, get_insights_platform, get_platform
 
 def get_ad_on_platform(platform):
     """
@@ -25,6 +25,15 @@ def get_insights(platform):
     - list: Lista contendo os insights de todas as contas associadas à plataforma.
     """
     list_insights = list()
+
+    name_platform_list = get_platform()
+    name_platform = name_platform_list["platforms"]
+    for i in name_platform:
+        if i["value"] == platform:
+            name_platform = i["text"]
+            break
+        
+    list_insights.append(name_platform)
 
     fields = get_fields(platform)
     list_field = ",".join(field["value"] for field in fields)
