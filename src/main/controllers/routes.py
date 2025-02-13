@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from src.main.swagger.analytics_doc import ns_analytics
-from src.main.usecases.instructions.instructions import get_instructions
+from src.main.usecases.instructions.instructions_use_case import get_instructions
+from main.usecases.plataform.accounts_use_case import get_plataform
 from src.main.swagger.config import api
 
 def register_routes(app):
@@ -11,5 +12,12 @@ def register_routes(app):
         return jsonify(response)
 
     app.route('/instructions', methods=['GET'])(get_data_instructions)
+
+    def get_data_plataform():
+        response = get_plataform()
+        
+        return jsonify(response)
+
+    app.route('/plataform', methods=['GET'])(get_data_plataform)
 
     api.add_namespace(ns_analytics)

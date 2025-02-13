@@ -1,15 +1,34 @@
 from flask_restx import Resource, Namespace
-from src.main.usecases.instructions.instructions import get_instructions
+from flask import request
+from src.main.usecases.instructions.instructions_use_case import get_instructions
+from src.main.usecases.infos.infos_use_case import get_infos
+from main.usecases.plataform.accounts_use_case import get_plataform
 
-ns_analytics = Namespace('technical challenge analytics', description='API for fetching and aggregating analytics data from the Stract platform.')
+ns_analytics = Namespace('challenge_insights', description='API for fetching and aggregating analytics data.')
 
-@ns_analytics.route('/instructions')
+@ns_analytics.route('/')
 class UsersResource(Resource):
-    @ns_analytics.doc('get_instructions')
+    @ns_analytics.doc('get_infos')
     def get(self):
-        response = get_instructions()
+        response = get_infos()
 
-        """Obtém as instruções para concluir o desafio técnico"""
+        """Obtém nome, email e o link para o seu LinkedIn"""
         return {
         "data": response
-    }
+        }
+
+
+@ns_analytics.route('/plataform')
+class GetPlataform(Resource):
+    @ns_analytics.param('platform', '', type='string', required=True)
+    @ns_analytics.param('page', '', type='int', required=False)
+    def get(self):
+        platform_name = request.args.get('platform', default='meta_ads')
+
+        page = request.args.get('page', default=None)
+
+        response = get_plataform(platform_name, page)
+
+        """ """
+        return response
+        
