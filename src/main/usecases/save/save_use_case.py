@@ -3,14 +3,21 @@ import os
 
 def save_list_to_csv(data, filename="ads_data.csv"):
     """ 
-    Obtém os anúncios de uma plataforma e salva em um arquivo CSV.
+    Salva os dados de anúncios de diferentes plataformas em um arquivo CSV.
 
     Parâmetros:
-    - platform (str): Nome da plataforma.
+    - data (list): Lista de dicionários contendo dados de anúncios organizados por plataforma. 
+                   Cada item pode ser uma string (nome da plataforma) ou um dicionário com a chave "insights".
     - filename (str): Nome do arquivo CSV de saída (padrão: "ads_data.csv").
-    
+
+    Funcionalidade:
+    - Cria um diretório "files_csv" na raiz do projeto, caso não exista.
+    - Remove a chave "id" dos dados antes de salvá-los.
+    - Adiciona uma nova coluna "plataform" para indicar a qual plataforma os dados pertencem.
+    - Escreve os dados no arquivo CSV, garantindo que os cabeçalhos correspondam às chaves dos insights.
+
     Retorna:
-    - None
+    - None (apenas salva o arquivo no diretório especificado).
     """
     name = ""
 
