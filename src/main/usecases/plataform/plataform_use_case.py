@@ -75,6 +75,10 @@ def get_people_accounts(platform):
                 list_people.extend(people['accounts'])
 
         return list_people
+    else:
+        list_people.extend(people['accounts'])
+        
+        return list_people
 
 
 def get_fields(platform):
