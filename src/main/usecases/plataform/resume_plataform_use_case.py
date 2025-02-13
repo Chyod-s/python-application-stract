@@ -39,6 +39,6 @@ def get_ad_on_platform_resume(platform):
                     if isinstance(value, (int, float)):
                         colapse_insights[key] += value
                     else:
-                        colapse_insights[key] = value 
+                        colapse_insights[key] = value
 
     return colapse_insights

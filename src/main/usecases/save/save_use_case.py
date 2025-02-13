@@ -31,6 +31,15 @@ def save_list_to_csv(data, filename="ads_data.csv"):
     
     save_path = os.path.join(directory, filename)
 
+    if isinstance(data, dict):
+        with open(save_path, mode="w", newline="", encoding="latin1") as file:
+            writer = csv.DictWriter(file, fieldnames=data.keys())
+
+            writer.writeheader()
+            writer.writerow(data)
+
+        return
+
     keys = list(data[1]['insights'][0].keys())
     if 'id' in keys:
         keys.remove('id')

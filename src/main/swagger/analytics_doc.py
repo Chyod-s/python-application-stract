@@ -59,7 +59,7 @@ class GetAdOnPlatformColapse(Resource):
         """
 
         response = get_ad_on_platform_resume(platform)
-        # save_list_to_csv(response, "get_ad_on_platform_resume.csv")
+        save_list_to_csv(response, "get_ad_on_platform_resume.csv")
 
         return response
 
