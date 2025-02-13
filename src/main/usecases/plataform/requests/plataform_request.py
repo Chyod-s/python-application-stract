@@ -4,6 +4,18 @@ import json
 
 BEARER_TOKEN = os.getenv("BEARER_TOKEN")
 
+def get_platform():
+    url = f'https://sidebar.stract.to/api/platforms'
+
+    headers = {
+        "Authorization": f"Bearer {BEARER_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    response = requests.get(url, headers=headers)
+    content = response.content.decode('utf-8')
+
+    return json.loads(content)
+
 def get_accounts_platform(plataform, page):
     url = f'https://sidebar.stract.to/api/accounts?platform={plataform}'
     if page:

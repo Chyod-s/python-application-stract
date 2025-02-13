@@ -1,5 +1,6 @@
 from flask_restx import Resource, Namespace
 from flask import request
+from src.main.usecases.plataform.plataform_use_case import get_ad_on_platform
 from src.main.usecases.infos.infos_use_case import get_infos
 from src.main.usecases.plataform.requests.plataform_request import get_accounts_platform, get_fields_platform, get_insights_platform
 
@@ -92,5 +93,24 @@ class GetInsightsPlatform(Resource):
         fields = request.args.getlist('fields')
 
         response = get_insights_platform(platform_name, account, token, fields)
+
+        return response
+    
+@ns_analytics.route('/get_ad_on_platform')
+class GetAdOnPlatform(Resource):
+    @ns_analytics.param('platform', '', type='string', required=True)
+    def get(self):
+        """
+        Recupera os anúncios disponíveis para uma plataforma específica.
+
+        Parâmetros:
+        - platform (str): Nome da plataforma de anúncios (ex: 'meta_ads', 'google_ads').
+
+        Retorna:
+        - Resposta contendo os anúncios disponíveis na plataforma solicitada.
+        """
+        platform_name = request.args.get('platform')
+
+        response = get_ad_on_platform(platform_name)
 
         return response
