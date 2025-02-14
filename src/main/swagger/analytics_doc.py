@@ -1,5 +1,5 @@
 from flask_restx import Resource, Namespace
-from flask import request
+from src.main.usecases.plataform.geral_plataform_use_case import get_general_ad_data
 from src.main.usecases.save.save_use_case import save_list_to_csv
 from src.main.usecases.plataform.plataform_use_case import get_ad_on_platform
 from src.main.usecases.plataform.resume_plataform_use_case import get_ad_on_platform_resume
@@ -64,14 +64,19 @@ class GetAdOnPlatformColapse(Resource):
         return response
 
 @ns_analytics.route('/geral')
-class UsersResource(Resource):
-    @ns_analytics.doc('get_general_info')
+class GeneralAdDataResource(Resource):
+    @ns_analytics.doc('get_general_ad_data')
     def get(self):
         """
-   
-        """
+        Recupera os dados publicitários de todas as plataformas disponíveis.
 
-        return "lol"
+        Retorna:
+        - dict: Um dicionário contendo as informações agregadas de anúncios para cada plataforma.
+        """
+        response = get_general_ad_data()
+
+        return response
+
     
 @ns_analytics.route('/geral/resumo')
 class UsersResource(Resource):
