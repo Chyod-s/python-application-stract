@@ -18,8 +18,8 @@ def get_general_ad_data():
             ad_data = get_ad_on_platform(platform_name)
 
             general_ad_data.extend(ad_data)  
-    lol = process_general_ad_data(general_ad_data)
-    return lol
+            
+    return process_general_ad_data(general_ad_data)
 
 def process_general_ad_data(list_platforms):
     """

@@ -1,4 +1,5 @@
 from flask_restx import Resource, Namespace
+from src.main.usecases.plataform.resume_geral_plataform_use_case import get_general_ad_data_resume
 from src.main.usecases.plataform.geral_plataform_use_case import get_general_ad_data
 from src.main.usecases.save.save_use_case import save_data_to_csv
 from src.main.usecases.plataform.plataform_use_case import get_ad_on_platform
@@ -72,6 +73,8 @@ class GeneralAdDataResource(Resource):
 
         Retorna:
         - dict: Um dicionário contendo as informações agregadas de anúncios para cada plataforma.
+
+        Os anuncios também são salvos no arquivo "get_general_ad_data.csv" dentro da pasta de saída.
         """
         response = get_general_ad_data()
         save_data_to_csv(response, "get_general_ad_data.csv")
@@ -84,7 +87,15 @@ class UsersResource(Resource):
     @ns_analytics.doc('get_general_info_resume')
     def get(self):
         """
-   
-        """
+        Recupera um resumo dos dados gerais de anúncios.
 
-        return "hahaha"
+        Retorna:
+        - dict: Um dicionário contendo as informações agregadas do resumo de anúncios.
+
+        Os anuncios também são salvos no arquivo "get_general_ad_data_resume.csv" dentro da pasta de saída.
+        """
+        response = get_general_ad_data_resume()
+        save_data_to_csv(response, "get_general_ad_data_resume.csv")
+
+        return response
+    
