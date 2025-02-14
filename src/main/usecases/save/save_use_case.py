@@ -1,7 +1,7 @@
 import csv
 import os
 
-def save_list_to_csv(data, filename="ads_data.csv"):
+def save_data_to_csv(data, filename="ads_data.csv"):
     """ 
     Salva os dados de anúncios de diferentes plataformas em um arquivo CSV.
 
@@ -32,14 +32,46 @@ def save_list_to_csv(data, filename="ads_data.csv"):
     save_path = os.path.join(directory, filename)
 
     if isinstance(data, dict):
-        with open(save_path, mode="w", newline="", encoding="latin1") as file:
-            writer = csv.DictWriter(file, fieldnames=data.keys())
+        save_dict_data_to_csv(data, save_path)
+    elif isinstance(data, list):
+        for i in data:
+            save_dict_data_to_csv(i, save_path, 'a')
+    else:
+        save_obj_data_to_csv(data, save_path)
 
+
+def save_dict_data_to_csv(data, save_path, type_mode='w'):
+    """
+    Salva um dicionário em um arquivo CSV, garantindo que os dados sejam escritos nas colunas corretas, 
+    sem alterar a ordem original das colunas.
+
+    Parâmetros:
+    - data (dict): Dicionário a ser salvo no CSV.
+    - save_path (str): Caminho do arquivo CSV.
+    - type_mode (str): Modo de abertura do arquivo ('w' para sobrescrever, 'a' para adicionar).
+    """
+    file_exists = os.path.exists(save_path)
+    existing_columns = []
+
+    if file_exists:
+        with open(save_path, mode="r", newline="", encoding="latin1") as file:
+            reader = csv.reader(file)
+            existing_columns = next(reader, [])  
+
+    fieldnames = existing_columns if existing_columns else list(data.keys())
+    if 'id' in fieldnames:
+        fieldnames.remove('id')
+
+    with open(save_path, mode=type_mode, newline="", encoding="latin1") as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+
+        if not file_exists or type_mode == 'w':
             writer.writeheader()
-            writer.writerow(data)
 
-        return
+        writer.writerow({col: data.get(col, "") for col in fieldnames})
 
+
+def save_obj_data_to_csv(data, save_path):
     keys = list(data[1]['insights'][0].keys())
     if 'id' in keys:
         keys.remove('id')
