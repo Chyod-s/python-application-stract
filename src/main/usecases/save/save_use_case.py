@@ -72,6 +72,25 @@ def save_dict_data_to_csv(data, save_path, type_mode='w'):
 
 
 def save_obj_data_to_csv(data, save_path):
+    """
+    Salva dados de uma lista de objetos em um arquivo CSV, incluindo a plataforma e removendo o campo 'id'.
+
+    Parâmetros:
+    - data (list[dict | str]): Lista contendo dicionários com insights e strings representando a plataforma.
+    - save_path (str): Caminho do arquivo CSV.
+
+    Funcionamento:
+    1. Obtém as chaves dos insights e remove 'id' se presente.
+    2. Cria o CSV com colunas ordenadas e adiciona 'plataform'.
+    3. Itera sobre `data`, armazenando a string da plataforma e processando os insights.
+    4. Escreve os insights no CSV, garantindo a ordem correta das colunas.
+
+    Exemplo de Saída:
+    ```
+    plataforma,ad_name,clicks,country,cpc
+    Facebook Ads,Anúncio 9,886,BR,0.335
+    ```
+    """
     keys = list(data[1]['insights'][0].keys())
     if 'id' in keys:
         keys.remove('id')
