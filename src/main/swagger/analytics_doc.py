@@ -1,6 +1,6 @@
 from flask_restx import Resource, Namespace
 from src.main.usecases.plataform.geral_plataform_use_case import get_general_ad_data
-from src.main.usecases.save.save_use_case import save_list_to_csv
+from src.main.usecases.save.save_use_case import save_data_to_csv
 from src.main.usecases.plataform.plataform_use_case import get_ad_on_platform
 from src.main.usecases.plataform.resume_plataform_use_case import get_ad_on_platform_resume
 from src.main.usecases.infos.infos_use_case import get_infos
@@ -39,7 +39,7 @@ class GetAdOnPlatform(Resource):
         """
 
         response = get_ad_on_platform(platform)
-        save_list_to_csv(response, "get_ad_on_platform.csv")
+        save_data_to_csv(response, "get_ad_on_platform.csv")
 
         return response
 
@@ -59,7 +59,7 @@ class GetAdOnPlatformColapse(Resource):
         """
 
         response = get_ad_on_platform_resume(platform)
-        save_list_to_csv(response, "get_ad_on_platform_resume.csv")
+        save_data_to_csv(response, "get_ad_on_platform_resume.csv")
 
         return response
 
@@ -74,6 +74,7 @@ class GeneralAdDataResource(Resource):
         - dict: Um dicionário contendo as informações agregadas de anúncios para cada plataforma.
         """
         response = get_general_ad_data()
+        save_data_to_csv(response, "get_general_ad_data.csv")
 
         return response
 
