@@ -71,7 +71,7 @@ pip install --upgrade -r requirements.txt
 ]
 ```
 
-## 2.2. `/api/<platform>/Resume`
+## 2.2. `/<platform>/Resume`
 **Método**: `GET`
 
 **Descrição**: Recupera um resumo consolidado dos anúncios de uma plataforma específica. Esse endpoint retorna uma tabela agregada com somatório de valores numéricos e o nome da conta.
