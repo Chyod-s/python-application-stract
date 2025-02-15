@@ -6,7 +6,7 @@ from src.main.usecases.plataform.plataform_use_case import get_ad_on_platform
 from src.main.usecases.plataform.resume_plataform_use_case import get_ad_on_platform_resume
 from src.main.usecases.infos.infos_use_case import get_infos
 
-ns_analytics = Namespace('challenge_insights', description='API for fetching and aggregating analytics data.')
+ns_analytics = Namespace('api', description='')
 
 @ns_analytics.route('/')
 class UsersResource(Resource):
