@@ -163,7 +163,7 @@ A API permite acessar dados de várias plataformas de anúncios e oferece endpoi
 ### Explicação:
 
 1. **/docs**: Este endpoint retorna a documentação interativa da API gerada automaticamente pelo Swagger.
-2. **/nome**: Este endpoint retorna informações básicas do usuário, como nome, e-mail, LinkedIn e GitHub.
+2. **/name**: Este endpoint retorna informações básicas do usuário, como nome, e-mail, LinkedIn e GitHub.
 3. **/instructions**: Retorna um arquivo de texto com as instruções para acessar os dados da API.
 4. **/{platform}**: Recupera dados dos anúncios de uma plataforma específica, identificada pelo nome fornecido na URL.
 5. **/{platform}/Resume**: Retorna um resumo consolidado dos anúncios de uma plataforma específica.
