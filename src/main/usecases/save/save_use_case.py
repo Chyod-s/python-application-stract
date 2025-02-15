@@ -33,9 +33,11 @@ def save_data_to_csv(data, filename="ads_data.csv"):
 
     if isinstance(data, dict):
         save_dict_data_to_csv(data, save_path)
+
     elif isinstance(data, list) and not type(data[0]) is str:
         for i in data:
             save_dict_data_to_csv(i, save_path, 'a')
+
     else:
         save_obj_data_to_csv(data, save_path)
 

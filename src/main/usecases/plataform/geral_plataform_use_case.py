@@ -75,12 +75,20 @@ def generate_new_ad_data(formatted_entry, general_ad_data):
         "region": "country",
         "status": "effective_status",
         "adName": "ad_name",
-        "cost": "spend"
+        "cost": "spend",
+        "cost_per_click": "cpc",
     }
 
     for key, value in formatted_entry.items():
         mapped_key = key_mapping.get(key, key) 
         new_dict[mapped_key] = value
-        new_keys.add(mapped_key)  
+        new_keys.add(mapped_key)
+
+    if 'cpc' not in new_dict and 'spend' in new_dict and 'clicks' in new_dict and new_dict['clicks'] > 0:
+        new_dict['cpc'] = new_dict['spend'] / new_dict['clicks']
+
+    if 'ctr' not in new_dict and 'clicks' in new_dict and 'impressions' in new_dict and new_dict['impressions'] > 0:
+        new_dict['ctr'] = new_dict['clicks'] / new_dict['impressions']
 
     return new_dict
+
