@@ -25,7 +25,9 @@ def save_data_to_csv(data, filename="ads_data.csv"):
         if not os.path.exists(caminho):
             os.makedirs(caminho)
 
-    directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "files_csv"))
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+
+    directory = os.path.abspath(os.path.join(os.path.join(script_dir, "../../../.."), "files_csv"))
 
     criar_pasta(directory)
     
