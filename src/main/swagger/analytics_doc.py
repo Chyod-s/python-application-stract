@@ -13,12 +13,13 @@ class UsersResource(Resource):
     @ns_analytics.doc('get_infos')
     def get(self):
         """
-        Obtém o nome, email, Github e o link para o LinkedIn.
+        Obtém o nome, e-mail, linkedIn e o link para o github .
 
         Retorna:
         - Um dicionário contendo os dados com o nome, email e link do LinkedIn.
         """
         response = get_infos()
+        save_data_to_csv(response, "get_infos.csv")
 
         return {
         "data": response

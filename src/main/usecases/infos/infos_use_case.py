@@ -1,8 +1,8 @@
 
 def get_infos():
     return {
-        "name": "Klayton Chrysthian Oliveira Dias",
-        "email": "hix_x@hotmail.com",
-        "linkedin": "https://www.linkedin.com/in/ton-chyod-s/",
+        "Nome": "Klayton Chrysthian Oliveira Dias",
+        "E-mail": "hix_x@hotmail.com",
+        "Linkedin": "https://www.linkedin.com/in/ton-chyod-s/",
         "Github": "https://github.com/Ton-Chyod-s"
         }
