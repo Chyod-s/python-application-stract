@@ -25,7 +25,7 @@ pip install --upgrade -r requirements.txt
 
 **200 OK**: Retorna o conteúdo de um arquivo de texto com as instruções.
 
-### 1.3. `/nome`
+### 1.3. `/name`
 
 **Método**: `GET`
 
@@ -131,7 +131,7 @@ Resposta:
 ]
 ```
 
-## 3.2. `/geral/resumo`
+## 3.2. `/geral/resume`
 **Método**: `GET`
 
 **Descrição**: Recupera um resumo geral de todos os anúncios de todas as plataformas. As colunas numéricas são somadas, e as de texto são agregadas por plataforma.

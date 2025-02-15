@@ -29,7 +29,7 @@ def register_routes(app):
 
         return jsonify(response)
     
-    @app.route('/<string:platform>/resumo', methods=['GET'])
+    @app.route('/<string:platform>/resume', methods=['GET'])
     def get_ad_on_platform_resume_route(platform):
         response = get_ad_on_platform_resume(platform)
         save_data_to_csv(response, "get_ad_on_platform_resume.csv")
@@ -43,7 +43,7 @@ def register_routes(app):
 
         return jsonify(response)
     
-    @app.route('/geral/resumo', methods=['GET'])
+    @app.route('/geral/resume', methods=['GET'])
     def get_general_ad_data_resume_resume_route():
         response = get_general_ad_data_resume()
         save_data_to_csv(response, "get_general_ad_data_resume.csv")
