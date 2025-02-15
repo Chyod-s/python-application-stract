@@ -84,7 +84,7 @@ class GeneralAdDataResource(Resource):
         return response
 
     
-@ns_analytics.route('/geral/resumo')
+@ns_analytics.route('/geral/resume')
 class UsersResource(Resource):
     @ns_analytics.doc('get_general_info_resume')
     def get(self):

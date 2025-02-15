@@ -10,7 +10,7 @@ GET_FIELDS_BY_PLATFORM_URL = os.getenv("GET_FIELDS_BY_PLATFORM_URL")
 GET_INSIGHTS_URL = os.getenv("GET_INSIGHTS_URL")
 
 def get_instructions():
-    url = GET_PLATFORMS_URL
+    url = BASE_API_URL
     headers = {
         "Authorization": f"Bearer {BEARER_TOKEN}",
         "Content-Type": "text/plain"
