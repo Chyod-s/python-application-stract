@@ -4,6 +4,15 @@ import json
 
 BEARER_TOKEN = os.getenv("BEARER_TOKEN")
 
+def get_instructions():
+    url = 'https://sidebar.stract.to/api'
+    headers = {
+        "Authorization": f"Bearer {BEARER_TOKEN}",
+        "Content-Type": "text/plain"
+    }
+    response = requests.get(url, headers=headers)
+    return response.content.decode('utf-8')
+
 def get_platform():
     url = f'https://sidebar.stract.to/api/platforms'
 

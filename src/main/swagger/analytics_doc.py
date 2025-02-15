@@ -13,17 +13,18 @@ class UsersResource(Resource):
     @ns_analytics.doc('get_infos')
     def get(self):
         """
-        Obtém o nome, e-mail, linkedIn e o link para o github .
+        Obtém o nome, e-mail, linkedIn e o link para o github.
 
         Retorna:
-        - Um dicionário contendo os dados com o nome, email e link do LinkedIn.
+        - Um dicionário contendo os dados com o nome, e-mail e linkedIn e o link para o github.
+
+        O dicionario também são sera salvo no arquivo "get_infos.csv" dentro da pasta de saída.
         """
         response = get_infos()
         save_data_to_csv(response, "get_infos.csv")
 
-        return {
-        "data": response
-        }
+        return response
+
 
 @ns_analytics.route('/<string:platform>')
 class GetAdOnPlatform(Resource):
